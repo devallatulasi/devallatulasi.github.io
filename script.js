@@ -34,7 +34,6 @@ function showStep() {
   const noBtn = document.createElement("button");
   noBtn.textContent = current.no;
 
-  // Moving NO button
   noBtn.onmouseover = () => {
     noBtn.style.position = "absolute";
     noBtn.style.top = Math.random() * 300 + "px";
@@ -45,18 +44,37 @@ function showStep() {
   btnArea.appendChild(noBtn);
 }
 
+function celebrate() {
+  question.textContent = "Yesss 💖 You just made this moment special!";
+  btnArea.style.display = "none";
+  message.textContent = "This smile right now = priceless ✨";
+
+  createHearts();
+}
+
 function createHearts() {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 25; i++) {
         let heart = document.createElement("div");
         heart.innerHTML = "💖";
-        heart.style.position = "absolute";
+        heart.style.position = "fixed";
         heart.style.left = Math.random() * window.innerWidth + "px";
         heart.style.top = window.innerHeight + "px";
         heart.style.fontSize = "24px";
-        heart.style.animation = "floatUp 3s linear forwards";
+        heart.style.pointerEvents = "none";
+        heart.style.animation = "floatUp 4s linear forwards";
         document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
     }
 }
-}
+
+// Animation added dynamically
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-800px); opacity: 0; }
+}`;
+document.head.appendChild(style);
 
 showStep();
