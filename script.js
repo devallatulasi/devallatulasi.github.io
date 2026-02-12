@@ -1,41 +1,92 @@
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const message = document.getElementById("message");
+let step = 0;
 
-// Make NO button run away
-noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+function nextStep(answer) {
+    const question = document.getElementById("question");
+    const btnArea = document.getElementById("btnArea");
+    const message = document.getElementById("message");
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-});
+    step++;
 
-// When YES is clicked
-yesBtn.addEventListener("click", () => {
-    message.innerHTML = "YAYYY!! 💖 You just made my day! 🌹✨";
-    createHearts();
-});
+    // STEP 1
+    if (step === 1) {
+        question.innerHTML = "Are you ready for something important? 😌";
+        btnArea.innerHTML = `
+            <button onclick="nextStep('yes')">Yes 👀</button>
+            <button onclick="nextStep('no')">No 🙈</button>
+        `;
+    }
 
-// Floating hearts animation
-function createHearts() {
-    for (let i = 0; i < 20; i++) {
-        let heart = document.createElement("div");
-        heart.innerHTML = "💖";
-        heart.style.position = "absolute";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.top = window.innerHeight + "px";
-        heart.style.fontSize = "24px";
-        heart.style.animation = "floatUp 3s linear forwards";
-        document.body.appendChild(heart);
+    // STEP 2 (funny reaction)
+    else if (step === 2) {
+        if (answer === 'no') {
+            message.innerHTML = "Too bad, we're continuing anyway 😂";
+        } else {
+            message.innerHTML = "Good... because I was nervous 😅";
+        }
+
+        question.innerHTML = "Do you believe in destiny? ✨";
+        btnArea.innerHTML = `
+            <button onclick="nextStep('yes')">Yes 💫</button>
+            <button onclick="nextStep('no')">Maybe 🤷‍♀️</button>
+        `;
+    }
+
+    // STEP 3
+    else if (step === 3) {
+        question.innerHTML = "What if destiny brought us to this page right now? 😳";
+        btnArea.innerHTML = `
+            <button onclick="nextStep('yes')">That’s cute 🥺</button>
+            <button onclick="nextStep('yes')">You’re dramatic 😂</button>
+        `;
+    }
+
+    // STEP 4 (teasing)
+    else if (step === 4) {
+        question.innerHTML = "Be honest... do I make you smile? 😊";
+        btnArea.innerHTML = `
+            <button onclick="nextStep('yes')">Maybe 😏</button>
+            <button onclick="nextStep('yes')">Yes 💖</button>
+        `;
+    }
+
+    // STEP 5 (fake suspense)
+    else if (step === 5) {
+        question.innerHTML = "Okay okay… deep breath… this is it 😶";
+        btnArea.innerHTML = `
+            <button onclick="nextStep('yes')">Tell me already!</button>
+        `;
+    }
+
+    // FINAL STEP
+    else if (step === 6) {
+        question.innerHTML = "Will you be my Valentine? 🌹💘";
+        btnArea.innerHTML = `
+            <button onclick="celebrate()">YES 💖</button>
+            <button id="noBtn">NO 😢</button>
+        `;
+
+        const noBtn = document.getElementById("noBtn");
+
+        // Desktop hover
+        noBtn.addEventListener("mouseover", moveButton);
+
+        // Mobile tap
+        noBtn.addEventListener("click", moveButton);
     }
 }
 
-// Add animation dynamically
-const style = document.createElement('style');
-style.innerHTML = `
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-800px); opacity: 0; }
-}`;
-document.head.appendChild(style);
+function moveButton(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.style.position = "absolute";
+    btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+}
+
+function celebrate() {
+    document.body.innerHTML = `
+        <h1 style="text-align:center;color:#ff4d6d;margin-top:35vh;">
+            SHE SAID YESSS 💖✨ <br><br> Best Day Ever 🌹
+        </h1>
+    `;
+}
