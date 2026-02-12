@@ -5,19 +5,20 @@ function nextStep(answer) {
     const btnArea = document.getElementById("btnArea");
     const message = document.getElementById("message");
 
-    step++;
-
-    // STEP 1
-    if (step === 1) {
+    // STEP 0 → First click
+    if (step === 0) {
+        step = 1;
         question.innerHTML = "Are you ready for something important? 😌";
         btnArea.innerHTML = `
             <button onclick="nextStep('yes')">Yes 👀</button>
             <button onclick="nextStep('no')">No 🙈</button>
         `;
+        return;
     }
 
-    // STEP 2 (funny reaction)
-    else if (step === 2) {
+    // STEP 1
+    if (step === 1) {
+        step = 2;
         if (answer === 'no') {
             message.innerHTML = "Too bad, we're continuing anyway 😂";
         } else {
@@ -29,36 +30,43 @@ function nextStep(answer) {
             <button onclick="nextStep('yes')">Yes 💫</button>
             <button onclick="nextStep('no')">Maybe 🤷‍♀️</button>
         `;
+        return;
     }
 
-    // STEP 3
-    else if (step === 3) {
+    // STEP 2
+    if (step === 2) {
+        step = 3;
         question.innerHTML = "What if destiny brought us to this page right now? 😳";
         btnArea.innerHTML = `
             <button onclick="nextStep('yes')">That’s cute 🥺</button>
             <button onclick="nextStep('yes')">You’re dramatic 😂</button>
         `;
+        return;
     }
 
-    // STEP 4 (teasing)
-    else if (step === 4) {
+    // STEP 3
+    if (step === 3) {
+        step = 4;
         question.innerHTML = "Be honest... do I make you smile? 😊";
         btnArea.innerHTML = `
             <button onclick="nextStep('yes')">Maybe 😏</button>
             <button onclick="nextStep('yes')">Yes 💖</button>
         `;
+        return;
     }
 
-    // STEP 5 (fake suspense)
-    else if (step === 5) {
+    // STEP 4
+    if (step === 4) {
+        step = 5;
         question.innerHTML = "Okay okay… deep breath… this is it 😶";
         btnArea.innerHTML = `
             <button onclick="nextStep('yes')">Tell me already!</button>
         `;
+        return;
     }
 
     // FINAL STEP
-    else if (step === 6) {
+    if (step === 5) {
         question.innerHTML = "Will you be my Valentine? 🌹💘";
         btnArea.innerHTML = `
             <button onclick="celebrate()">YES 💖</button>
@@ -66,11 +74,7 @@ function nextStep(answer) {
         `;
 
         const noBtn = document.getElementById("noBtn");
-
-        // Desktop hover
         noBtn.addEventListener("mouseover", moveButton);
-
-        // Mobile tap
         noBtn.addEventListener("click", moveButton);
     }
 }
