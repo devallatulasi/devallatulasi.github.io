@@ -45,22 +45,18 @@ function showStep() {
   btnArea.appendChild(noBtn);
 }
 
-function celebrate() {
-  question.textContent = "Yesss 💖 You just made this moment special!";
-  btnArea.style.display = "none";
-  message.textContent = "This smile right now = priceless ✨";
-
-  // Heart rain
-  for (let i = 0; i < 40; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "-20px";
-    heart.style.animation = "fall 3s linear forwards";
-    heart.style.fontSize = "24px";
-    document.body.appendChild(heart);
-  }
+function createHearts() {
+    for (let i = 0; i < 20; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.style.position = "absolute";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        heart.style.fontSize = "24px";
+        heart.style.animation = "floatUp 3s linear forwards";
+        document.body.appendChild(heart);
+    }
+}
 }
 
 showStep();
