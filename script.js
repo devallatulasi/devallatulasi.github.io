@@ -1,96 +1,95 @@
+const steps = [
+  {
+    q: "Hey… I wanted to ask you something 😊",
+    yes: "Okay tell me",
+    no: "Ignore"
+  },
+  {
+    q: "Be honest… are you naturally this charming or is this a special occasion? ✨",
+    yes: "Naturally 😌",
+    no: "Special today"
+  },
+  {
+    q: "Okay serious question… how do you manage to look cute even in imagination? 😂💖",
+    yes: "Magic maybe",
+    no: "Stop it 😂"
+  },
+  {
+    q: "Ee moment lo hero evaru telusa? Nuvve 😌",
+    yes: "Oh really?",
+    no: "Drama aa 😏"
+  },
+  {
+    q: "Nuvvu navvite, scene lo brightness automatic ga perigipothundi ✨",
+    yes: "Haha nice one",
+    no: "Too much 😅"
+  },
+  {
+    q: "Nuvvu random ga kuda cute ga untav ante, planned ga ela untavo imagine cheyyali 😂",
+    yes: "You’re funny",
+    no: "Stop teasing"
+  },
+  {
+    q: "Talking with you feels different… in a good way 💫",
+    yes: "Aww",
+    no: "Different how?"
+  },
+  {
+    q: "So… will you be my Valentine? 💖",
+    yes: "YESSS 💘",
+    no: "No"
+  }
+];
+
 let step = 0;
 
-function nextStep(answer) {
-    const question = document.getElementById("question");
-    const btnArea = document.getElementById("btnArea");
-    const message = document.getElementById("message");
+const question = document.getElementById("question");
+const btnArea = document.getElementById("btnArea");
+const message = document.getElementById("message");
 
-    // STEP 0 → First click
-    if (step === 0) {
-        step = 1;
-        question.innerHTML = "Are you ready for something important? 😌";
-        btnArea.innerHTML = `
-            <button onclick="nextStep('yes')">Yes 👀</button>
-            <button onclick="nextStep('no')">No 🙈</button>
-        `;
-        return;
+function showStep() {
+  const current = steps[step];
+  question.textContent = current.q;
+  btnArea.innerHTML = "";
+
+  const yesBtn = document.createElement("button");
+  yesBtn.textContent = current.yes;
+  yesBtn.onclick = () => {
+    if (step === steps.length - 1) {
+      celebrate();
+    } else {
+      step++;
+      showStep();
     }
+  };
 
-    // STEP 1
-    if (step === 1) {
-        step = 2;
-        if (answer === 'no') {
-            message.innerHTML = "Too bad, we're continuing anyway 😂";
-        } else {
-            message.innerHTML = "Good... because I was nervous 😅";
-        }
+  const noBtn = document.createElement("button");
+  noBtn.textContent = current.no;
+  noBtn.onmouseover = () => {
+    noBtn.style.position = "absolute";
+    noBtn.style.top = Math.random() * 300 + "px";
+    noBtn.style.left = Math.random() * 300 + "px";
+  };
 
-        question.innerHTML = "Do you believe in destiny? ✨";
-        btnArea.innerHTML = `
-            <button onclick="nextStep('yes')">Yes 💫</button>
-            <button onclick="nextStep('no')">Maybe 🤷‍♀️</button>
-        `;
-        return;
-    }
-
-    // STEP 2
-    if (step === 2) {
-        step = 3;
-        question.innerHTML = "What if destiny brought us to this page right now? 😳";
-        btnArea.innerHTML = `
-            <button onclick="nextStep('yes')">That’s cute 🥺</button>
-            <button onclick="nextStep('yes')">You’re dramatic 😂</button>
-        `;
-        return;
-    }
-
-    // STEP 3
-    if (step === 3) {
-        step = 4;
-        question.innerHTML = "Be honest... do I make you smile? 😊";
-        btnArea.innerHTML = `
-            <button onclick="nextStep('yes')">Maybe 😏</button>
-            <button onclick="nextStep('yes')">Yes 💖</button>
-        `;
-        return;
-    }
-
-    // STEP 4
-    if (step === 4) {
-        step = 5;
-        question.innerHTML = "Okay okay… deep breath… this is it 😶";
-        btnArea.innerHTML = `
-            <button onclick="nextStep('yes')">Tell me already!</button>
-        `;
-        return;
-    }
-
-    // FINAL STEP
-    if (step === 5) {
-        question.innerHTML = "Will you be my Valentine? 🌹💘";
-        btnArea.innerHTML = `
-            <button onclick="celebrate()">YES 💖</button>
-            <button id="noBtn">NO 😢</button>
-        `;
-
-        const noBtn = document.getElementById("noBtn");
-        noBtn.addEventListener("mouseover", moveButton);
-        noBtn.addEventListener("click", moveButton);
-    }
-}
-
-function moveButton(e) {
-    e.preventDefault();
-    const btn = e.target;
-    btn.style.position = "absolute";
-    btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
-    btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+  btnArea.appendChild(yesBtn);
+  btnArea.appendChild(noBtn);
 }
 
 function celebrate() {
-    document.body.innerHTML = `
-        <h1 style="text-align:center;color:#ff4d6d;margin-top:35vh;">
-            SHE SAID YESSS 💖✨ <br><br> Best Day Ever 🌹
-        </h1>
-    `;
+  question.textContent = "Yesss 💖 You just made this moment special!";
+  btnArea.style.display = "none";
+  message.textContent = "This smile right now = priceless ✨";
+
+  // Heart rain
+  for (let i = 0; i < 40; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animation = "fall 3s linear forwards";
+    heart.style.fontSize = "24px";
+    document.body.appendChild(heart);
+  }
 }
+
+showStep();
