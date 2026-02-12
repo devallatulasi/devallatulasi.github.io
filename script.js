@@ -1,44 +1,12 @@
 const steps = [
-  {
-    q: "Hey… I wanted to ask you something 😊",
-    yes: "Okay tell me",
-    no: "Ignore"
-  },
-  {
-    q: "Be honest… are you naturally this charming or is this a special occasion? ✨",
-    yes: "Naturally 😌",
-    no: "Special today"
-  },
-  {
-    q: "Okay serious question… how do you manage to look cute even in imagination? 😂💖",
-    yes: "Magic maybe",
-    no: "Stop it 😂"
-  },
-  {
-    q: "Ee moment lo hero evaru telusa? Nuvve 😌",
-    yes: "Oh really?",
-    no: "Drama aa 😏"
-  },
-  {
-    q: "Nuvvu navvite, scene lo brightness automatic ga perigipothundi ✨",
-    yes: "Haha nice one",
-    no: "Too much 😅"
-  },
-  {
-    q: "Nuvvu random ga kuda cute ga untav ante, planned ga ela untavo imagine cheyyali 😂",
-    yes: "You’re funny",
-    no: "Stop teasing"
-  },
-  {
-    q: "Talking with you feels different… in a good way 💫",
-    yes: "Aww",
-    no: "Different how?"
-  },
-  {
-    q: "So… will you be my Valentine? 💖",
-    yes: "YESSS 💘",
-    no: "No"
-  }
+  { q: "Hey… I wanted to ask you something 😊", yes: "Okay tell me", no: "Ignore" },
+  { q: "Be honest… are you naturally this charming or is this a special occasion? ✨", yes: "Naturally 😌", no: "Special today" },
+  { q: "Okay serious question… how do you manage to look cute even in imagination? 😂💖", yes: "Magic maybe", no: "Stop it 😂" },
+  { q: "Ee moment lo hero evaru telusa? Nuvve 😌", yes: "Oh really?", no: "Drama aa 😏" },
+  { q: "Nuvvu navvite, scene lo brightness automatic ga perigipothundi ✨", yes: "Haha nice one", no: "Too much 😅" },
+  { q: "Nuvvu random ga kuda cute ga untav ante, planned ga ela untavo imagine cheyyali 😂", yes: "You’re funny", no: "Stop teasing" },
+  { q: "Talking with you feels different… in a good way 💫", yes: "Aww", no: "Different how?" },
+  { q: "So… will you be my Valentine? 💖", yes: "YESSS 💘", no: "No" }
 ];
 
 let step = 0;
@@ -65,6 +33,8 @@ function showStep() {
 
   const noBtn = document.createElement("button");
   noBtn.textContent = current.no;
+
+  // Moving NO button
   noBtn.onmouseover = () => {
     noBtn.style.position = "absolute";
     noBtn.style.top = Math.random() * 300 + "px";
@@ -86,6 +56,7 @@ function celebrate() {
     heart.innerHTML = "💖";
     heart.style.position = "fixed";
     heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-20px";
     heart.style.animation = "fall 3s linear forwards";
     heart.style.fontSize = "24px";
     document.body.appendChild(heart);
